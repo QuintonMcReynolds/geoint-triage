@@ -1,5 +1,9 @@
 PY ?= .venv/bin/python
 
+artifacts:       ## download the trained ONNX model + embedding bank from the v1.0.0 release
+	curl -fsSL -o artifacts/chipnet.onnx https://github.com/QuintonMcReynolds/geoint-triage/releases/download/v1.0.0/chipnet.onnx
+	curl -fsSL -o artifacts/triage_bank.npz https://github.com/QuintonMcReynolds/geoint-triage/releases/download/v1.0.0/triage_bank.npz
+
 data:            ## download + cache EuroSAT RGB
 	$(PY) -c "from geoint.data import prepare; prepare()"
 train:           ## train clean + degradation-augmented models
@@ -19,4 +23,4 @@ serve:
 	$(PY) -m uvicorn serve.app:app --port 8080
 all: data train eval export feed test
 
-.PHONY: data train eval export feed agent-eval test serve all
+.PHONY: artifacts data train eval export feed agent-eval test serve all

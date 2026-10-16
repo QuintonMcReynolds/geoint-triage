@@ -80,13 +80,15 @@ def test_novel_pass_flags_more_than_routine(engine):
 def test_mcp_tools_listed():
     import asyncio
 
-    from mcp import ClientSession
+    import sys
+
+    from mcp import ClientSession, StdioServerParameters
     from mcp.client.stdio import stdio_client
 
-    from geoint.agent import mcp_params
+    params = StdioServerParameters(command=sys.executable, args=["-m", "geoint.mcp_server"])
 
     async def go():
-        async with stdio_client(mcp_params()) as (r, w), ClientSession(r, w) as s:
+        async with stdio_client(params) as (r, w), ClientSession(r, w) as s:
             await s.initialize()
             names = {t.name for t in (await s.list_tools()).tools}
             res = await s.call_tool("triage_pass", {"pass_id": "passA"})

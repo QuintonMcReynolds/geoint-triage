@@ -6,3 +6,5 @@ artifacts/*.pt
 artifacts/*.out
 .pytest_cache/
 .DS_Store
+artifacts/chipnet.onnx
+artifacts/triage_bank.npz

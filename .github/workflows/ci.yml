@@ -10,14 +10,17 @@ jobs:
         with: {lfs: false}
       - uses: actions/setup-python@v5
         with: {python-version: "3.12"}
+      - name: fetch trained artifacts (GitHub release)
+        run: make artifacts
       - run: pip install -r requirements-serve.txt scikit-learn==1.9.1 pytest==9.1.1 httpx==0.28.1
-      # unit tests always; service tests run against the committed ONNX artifacts
       - run: python -m pytest -q
   docker:
     runs-on: ubuntu-latest
     needs: test
     steps:
       - uses: actions/checkout@v4
+      - name: fetch trained artifacts (GitHub release)
+        run: make artifacts
       - run: docker build -t geoint-triage:ci .
       - name: smoke test
         run: |

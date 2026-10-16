@@ -149,8 +149,9 @@ make agent-eval                            # downloads Qwen2.5 0.5B/1.5B/3B from
 .venv/bin/python -m geoint.agent "Which pass has the most chips flagged as novel?"
 ```
 
-The trained ONNX model, embedding bank and policy are committed in `artifacts/`, so `make serve`, the MCP server and
-the tests work straight from a clone without training.
+No time to train? `make artifacts` downloads the trained ONNX model and embedding bank from the
+[v1.0.0 release](https://github.com/QuintonMcReynolds/geoint-triage/releases/tag/v1.0.0) (the policy file is in git),
+and then `make serve`, the MCP server and the tests work straight from a clone.
 
 **REST API**
 
@@ -171,7 +172,7 @@ from Claude Desktop or Cursor:
                                    "cwd": "/path/to/geoint-triage"}}}
 ```
 
-**Docker** (ONNX Runtime only, non-root, ~45 MB model baked in): `docker build -t geoint-triage . && docker run -p 8080:8080 geoint-triage`.
+**Docker** (ONNX Runtime only, non-root, ~45 MB model baked in): `make artifacts && docker build -t geoint-triage . && docker run -p 8080:8080 geoint-triage`.
 CI builds the image and smoke-tests `/classify` on every push.
 
 ## Layout
