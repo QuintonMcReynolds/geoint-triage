@@ -1,0 +1,6 @@
+.venv
+data
+reports
+.git
+**/__pycache__
+artifacts/*.pt

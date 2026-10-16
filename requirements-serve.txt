@@ -1,0 +1,9 @@
+# Runtime for the ONNX service and the MCP server (no torch).
+numpy==2.5.4
+scipy==1.18.1
+onnxruntime==1.31.0
+fastapi==0.143.2
+uvicorn==0.54.0
+python-multipart==0.0.32
+pillow==12.3.0
+mcp==2.3.0

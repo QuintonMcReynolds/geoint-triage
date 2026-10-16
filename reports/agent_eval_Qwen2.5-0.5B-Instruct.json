@@ -1,0 +1,571 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "summary": {
+    "tool_ok": 0.6428571428571429,
+    "answer_ok": 0.5357142857142857,
+    "grounded": 0.8928571428571429,
+    "n": 28,
+    "mean_calls": 1.0,
+    "malformed_calls": 0,
+    "tool_errors": 8,
+    "mean_sec": 2.667076425571395
+  },
+  "rows": [
+    {
+      "tool_text": "[{\"pass_id\": \"passA\", \"n_chips\": 60, \"collected\": \"2026-10-01T14:05Z\"}, {\"pass_id\": \"passB\", \"n_chips\": 60, \"collected\": \"2026-10-02T14:11Z\"}, {\"pass_id\": \"passC\", \"n_chips\": 60, \"collected\": \"2026-10-03T13:58Z\"}, {\"pass_id\": \"passD\", \"n_chips\": 60, \"collected\": \"2026-10-04T14:02Z\"}]",
+      "q": "What collection passes are available for triage?",
+      "tool_ok": true,
+      "answer_ok": false,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 6.376502292001533,
+      "answer": "There are three collection passes available for triage:\n\n1. **passA**: 60 chips collected on 2026-10-01T14:05Z\n2. **passB**: 60 chips collected on 2026-10-02T14:11Z\n3. **passC**: 60 chips collected on 2026-10-03T13:58Z\n\nThese passes have been collected at the specified times.",
+      "calls": [
+        {
+          "name": "list_passes",
+          "args": {}
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"pass_id\": \"passA\", \"n_chips\": 60, \"n_auto\": 55, \"n_analyst\": 5, \"n_novel\": 2, \"n_low_confidence\": 3, \"auto_label_counts\": {\"Residential\": 9, \"AnnualCrop\": 9, \"Forest\": 7, \"PermanentCrop\": 7, \"SeaLake\": 7, \"Pasture\": 6, \"River\": 5, \"HerbaceousVegetation\": 5}, \"analyst_queue\": [{\"chip_id\": \"passA-005\", \"reason\": \"low_confidence\", \"best_guess\": \"SeaLake\", \"confidence\": 0.4995}, {\"chip_id\": \"passA-011\", \"reason\": \"low_confidence\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.7993}, {\"chip_id\": \"passA-019\", \"reason\": \"low_confidence\", \"best_guess\": \"AnnualCrop\", \"confidence\": 0.6715}, {\"chip_id\": \"passA-022\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9965}, {\"chip_id\": \"passA-035\", \"reason\": \"novel\", \"best_guess\": \"SeaLake\", \"confidence\": 0.9551}]}",
+      "q": "How many chips in passA need an analyst to review them?",
+      "tool_ok": true,
+      "answer_ok": true,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 6.847068625000247,
+      "answer": "In passA, there are 60 chips in total. Out of these, 55 are classified as auto-labeled (novel), 5 are classified as low-confidence, and 2 are classified as not novel at all. The most common types of chips are Residential (9), AnnualCrop (7), Forest (7), PermanentCrop (7), SeaLake (7), Pasture (6), River (5), and HerbaceousVegetation (5).\n\nThe analyst queue contains the following chips:\n- Chip ID: passA-005 - Reason: low_confidence, Best Guess: SeaLake, Confidence: 0.4995\n- Chip ID: passA-011 - Reason: low_confidence, Best Guess: HerbaceousVegetation, Confidence: 0.7993\n- Chip ID: passA-019 - Reason: low_confidence, Best Guess: AnnualCrop, Confidence: 0.6715\n- Chip ID: passA-022 - Reason: novel, Best Guess: River, Confidence: 0.9965\n- Chip ID: passA-035 - Reason: novel, Best Guess: SeaLake, Confidence: 0.9551\n\nThis analysis shows that while some chips are novel, they are also classified as low-confidence, which could indicate potential issues with the classification process.",
+      "calls": [
+        {
+          "name": "triage_pass",
+          "args": {
+            "pass_id": "passA"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "ERROR: unknown pass_id 'passB-017'; call list_passes",
+      "q": "How many chips in passB need an analyst to review them?",
+      "tool_ok": false,
+      "answer_ok": false,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 1,
+      "sec": 2.5508090410003206,
+      "answer": "I'm sorry, but there seems to be an issue with executing the `triage_pass` function. Could you please provide me with the details of the pass ID you're interested in?",
+      "calls": [
+        {
+          "name": "triage_pass",
+          "args": {
+            "pass_id": "passB-017"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"pass_id\": \"passC\", \"n_chips\": 60, \"n_auto\": 51, \"n_analyst\": 9, \"n_novel\": 9, \"n_low_confidence\": 0, \"auto_label_counts\": {\"HerbaceousVegetation\": 10, \"Residential\": 10, \"AnnualCrop\": 7, \"Forest\": 7, \"River\": 6, \"SeaLake\": 5, \"PermanentCrop\": 4, \"Pasture\": 2}, \"analyst_queue\": [{\"chip_id\": \"passC-014\", \"reason\": \"novel\", \"best_guess\": \"PermanentCrop\", \"confidence\": 0.8064}, {\"chip_id\": \"passC-020\", \"reason\": \"novel\", \"best_guess\": \"PermanentCrop\", \"confidence\": 0.8803}, {\"chip_id\": \"passC-021\", \"reason\": \"novel\", \"best_guess\": \"Residential\", \"confidence\": 0.8997}, {\"chip_id\": \"passC-024\", \"reason\": \"novel\", \"best_guess\": \"Pasture\", \"confidence\": 0.9304}, {\"chip_id\": \"passC-026\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9803}, {\"chip_id\": \"passC-027\", \"reason\": \"novel\", \"best_guess\": \"SeaLake\", \"confidence\": 0.9985}, {\"chip_id\": \"passC-033\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9238}, {\"chip_id\": \"passC-040\", \"reason\": \"novel\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.8706}, {\"chip_id\": \"passC-055\", \"reason\": \"novel\", \"best_guess\": \"PermanentCrop\", \"confidence\": 0.998}]}",
+      "q": "How many chips in passC need an analyst to review them?",
+      "tool_ok": true,
+      "answer_ok": true,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 5.842975083000056,
+      "answer": "There are 60 chips in passC that require an analyst to review them. Out of these, 51 are classified as novel (unlike anything in training), while 9 are classified as low confidence. The most common classifications are:\n\n- HerbaceousVegetation: 10\n- Residential: 10\n- AnnualCrop: 7\n- Forest: 7\n- River: 6\n- SeaLake: 5\n- PermanentCrop: 4\n- Pasture: 2\n\nThe analyst queue includes the following chips:\n- passC-014 - Novel\n- passC-020 - Novel\n- passC-021 - Novel\n- passC-024 - Novel\n- passC-026 - Novel\n- passC-027 - Novel\n- passC-027 - Novel\n- passC-033 - Novel\n- passC-040 - Novel\n- passC-055 - Novel\n\nThe AI has identified 9 chips as having been reviewed by an analyst due to being classified as novel.",
+      "calls": [
+        {
+          "name": "triage_pass",
+          "args": {
+            "pass_id": "passC"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"pass_id\": \"passD\", \"n_chips\": 60, \"n_auto\": 33, \"n_analyst\": 27, \"n_novel\": 23, \"n_low_confidence\": 4, \"auto_label_counts\": {\"SeaLake\": 9, \"Forest\": 6, \"PermanentCrop\": 6, \"Residential\": 4, \"River\": 4, \"HerbaceousVegetation\": 3, \"AnnualCrop\": 1}, \"analyst_queue\": [{\"chip_id\": \"passD-000\", \"reason\": \"novel\", \"best_guess\": \"PermanentCrop\", \"confidence\": 0.9022}, {\"chip_id\": \"passD-002\", \"reason\": \"novel\", \"best_guess\": \"AnnualCrop\", \"confidence\": 0.6629}, {\"chip_id\": \"passD-005\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.3906}, {\"chip_id\": \"passD-006\", \"reason\": \"novel\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.6744}, {\"chip_id\": \"passD-012\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9961}, {\"chip_id\": \"passD-013\", \"reason\": \"low_confidence\", \"best_guess\": \"Forest\", \"confidence\": 0.6117}, {\"chip_id\": \"passD-014\", \"reason\": \"novel\", \"best_guess\": \"Pasture\", \"confidence\": 0.2983}, {\"chip_id\": \"passD-015\", \"reason\": \"novel\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.7104}, {\"chip_id\": \"passD-016\", \"reason\": \"novel\", \"best_guess\": \"Forest\", \"confidence\": 0.9945}, {\"chip_id\": \"passD-018\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9949}, {\"chip_id\": \"passD-020\", \"reason\": \"novel\", \"best_guess\": \"PermanentCrop\", \"confidence\": 0.405}, {\"chip_id\": \"passD-022\", \"reason\": \"novel\", \"best_guess\": \"SeaLake\", \"confidence\": 0.6934}, {\"chip_id\": \"passD-023\", \"reason\": \"novel\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.9636}, {\"chip_id\": \"passD-026\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9979}, {\"chip_id\": \"passD-027\", \"reason\": \"novel\", \"best_guess\": \"Forest\", \"confidence\": 0.9805}, {\"chip_id\": \"passD-030\", \"reason\": \"novel\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.9882}, {\"chip_id\": \"passD-031\", \"reason\": \"low_confidence\", \"best_guess\": \"Forest\", \"confidence\": 0.6845}, {\"chip_id\": \"passD-032\", \"reason\": \"novel\", \"best_guess\": \"SeaLake\", \"confidence\": 0.4115}, {\"chip_id\": \"passD-033\", \"reason\": \"novel\", \"best_guess\": \"Pasture\", \"confidence\": 0.9445}, {\"chip_id\": \"passD-035\", \"reason\": \"novel\", \"best_guess\": \"Pasture\", \"confidence\": 0.814}, {\"chip_id\": \"passD-037\", \"reason\": \"low_confidence\", \"best_guess\": \"SeaLake\", \"confidence\": 0.7492}, {\"chip_id\": \"passD-038\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.989}, {\"chip_id\": \"passD-051\", \"reason\": \"novel\", \"best_guess\": \"Pasture\", \"confidence\": 0.9782}, {\"chip_id\": \"passD-053\", \"reason\": \"novel\", \"best_guess\": \"SeaLake\", \"confidence\": 0.9768}, {\"chip_id\": \"passD-055\", \"reason\": \"novel\", \"best_guess\": \"AnnualCrop\", \"confidence\": 0.7789}]}",
+      "q": "How many chips in passD need an analyst to review them?",
+      "tool_ok": true,
+      "answer_ok": true,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 3.1154461659971275,
+      "answer": "There are 60 chips in passD that require an analyst to review them. Out of these, 33 are classified as auto-labeled, 27 as novel, and 4 as low-confidence. The most common type of chip is PermanentCrop, which appears 9 times out of 60.",
+      "calls": [
+        {
+          "name": "triage_pass",
+          "args": {
+            "pass_id": "passD"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"pass_id\": \"passA\", \"n_chips\": 60, \"mmd2\": -0.00864, \"p_value\": 0.99, \"label_psi\": 0.021, \"drift_alarm\": false, \"note\": \"MMD on embeddings vs. validation reference; alarm at p<0.01\"}",
+      "q": "Is there any sign of drift in passA?",
+      "tool_ok": true,
+      "answer_ok": true,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 2.6198782910032605,
+      "answer": "The drift check indicates no significant drift in passA. The MMD value is -0.00864, which is below the threshold of 0.01. This suggests that the pass has not experienced a notable change compared to its validation reference. Therefore, the model's classification remains accurate.",
+      "calls": [
+        {
+          "name": "drift_check",
+          "args": {
+            "pass_id": "passA"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"pass_id\": \"passB\", \"n_chips\": 60, \"mmd2\": 0.00634, \"p_value\": 0.1642, \"label_psi\": 0.177, \"drift_alarm\": false, \"note\": \"MMD on embeddings vs. validation reference; alarm at p<0.01\"}",
+      "q": "Is there any sign of drift in passB?",
+      "tool_ok": true,
+      "answer_ok": true,
+      "grounded": false,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 3.0002853330006474,
+      "answer": "The drift check indicates no significant drift in passB. The MMD value is 0.00634, which is below the threshold of 0.05. Therefore, there is no evidence of drift in this specific pass. The label psi is also very high (0.177), suggesting strong agreement between the model's predictions and the actual data. This aligns well with the model's performance on this dataset.",
+      "calls": [
+        {
+          "name": "drift_check",
+          "args": {
+            "pass_id": "passB"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"pass_id\": \"passC\", \"n_chips\": 60, \"mmd2\": 0.00198, \"p_value\": 0.3234, \"label_psi\": 0.106, \"drift_alarm\": false, \"note\": \"MMD on embeddings vs. validation reference; alarm at p<0.01\"}",
+      "q": "Is there any sign of drift in passC?",
+      "tool_ok": true,
+      "answer_ok": true,
+      "grounded": false,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 2.7854533749996335,
+      "answer": "Yes, there is evidence of drift in passC. The MMD value is 0.00198, which is significantly lower than the validation reference value of 0.002. This suggests that the pass has drifted compared to its validation set. The probability of drift is 0.3234, indicating a moderate level of drift. There is no mention of a note about the drift alarm being raised at a significance level of 0.01.",
+      "calls": [
+        {
+          "name": "drift_check",
+          "args": {
+            "pass_id": "passC"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"pass_id\": \"passD\", \"n_chips\": 60, \"mmd2\": 0.03826, \"p_value\": 0.005, \"label_psi\": 0.25, \"drift_alarm\": true, \"note\": \"MMD on embeddings vs. validation reference; alarm at p<0.01\"}",
+      "q": "Is there any sign of drift in passD?",
+      "tool_ok": true,
+      "answer_ok": true,
+      "grounded": false,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 2.749028417001682,
+      "answer": "Yes, there is evidence of drift in passD. The MMD value is 0.03826, which is significantly lower than the validation reference value of 0.049. This suggests that the pass has diverged from the model's expected behavior. The P-value is also very low (p=0.005), indicating strong evidence against the null hypothesis that the pass follows the model's distribution. Therefore, we have reason to believe that the pass might be novel or contain errors.",
+      "calls": [
+        {
+          "name": "drift_check",
+          "args": {
+            "pass_id": "passD"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"pass_id\": \"passA\", \"n_chips\": 60, \"n_auto\": 55, \"n_analyst\": 5, \"n_novel\": 2, \"n_low_confidence\": 3, \"auto_label_counts\": {\"Residential\": 9, \"AnnualCrop\": 9, \"Forest\": 7, \"PermanentCrop\": 7, \"SeaLake\": 7, \"Pasture\": 6, \"River\": 5, \"HerbaceousVegetation\": 5}, \"analyst_queue\": [{\"chip_id\": \"passA-005\", \"reason\": \"low_confidence\", \"best_guess\": \"SeaLake\", \"confidence\": 0.4995}, {\"chip_id\": \"passA-011\", \"reason\": \"low_confidence\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.7993}, {\"chip_id\": \"passA-019\", \"reason\": \"low_confidence\", \"best_guess\": \"AnnualCrop\", \"confidence\": 0.6715}, {\"chip_id\": \"passA-022\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9965}, {\"chip_id\": \"passA-035\", \"reason\": \"novel\", \"best_guess\": \"SeaLake\", \"confidence\": 0.9551}]}",
+      "q": "In passA, how many chips look like nothing the model was trained on?",
+      "tool_ok": true,
+      "answer_ok": true,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 2.76509758300017,
+      "answer": "In passA, there are 60 chips that look like nothing the model was trained on. Out of these, 55 are classified as novel (unlike anything in training), 2 are classified as low confidence, and 3 are classified as automated. The most common classification is SeaLake (9 occurrences), followed by HerbaceousVegetation (7 occurrences), AnnualCrop (7 occurrences), River (7 occurrences), and PermanentCrop (7 occurrences).",
+      "calls": [
+        {
+          "name": "triage_pass",
+          "args": {
+            "pass_id": "passA"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "ERROR: unknown pass_id 'passB-017'; call list_passes",
+      "q": "In passB, how many chips look like nothing the model was trained on?",
+      "tool_ok": false,
+      "answer_ok": false,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 1,
+      "sec": 1.6312605419989268,
+      "answer": "I'm sorry, but there seems to be an issue with executing the `triage_pass` function. Could you please provide me with the details of the pass ID you're interested in?",
+      "calls": [
+        {
+          "name": "triage_pass",
+          "args": {
+            "pass_id": "passB-017"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"pass_id\": \"passC\", \"n_chips\": 60, \"n_auto\": 51, \"n_analyst\": 9, \"n_novel\": 9, \"n_low_confidence\": 0, \"auto_label_counts\": {\"HerbaceousVegetation\": 10, \"Residential\": 10, \"AnnualCrop\": 7, \"Forest\": 7, \"River\": 6, \"SeaLake\": 5, \"PermanentCrop\": 4, \"Pasture\": 2}, \"analyst_queue\": [{\"chip_id\": \"passC-014\", \"reason\": \"novel\", \"best_guess\": \"PermanentCrop\", \"confidence\": 0.8064}, {\"chip_id\": \"passC-020\", \"reason\": \"novel\", \"best_guess\": \"PermanentCrop\", \"confidence\": 0.8803}, {\"chip_id\": \"passC-021\", \"reason\": \"novel\", \"best_guess\": \"Residential\", \"confidence\": 0.8997}, {\"chip_id\": \"passC-024\", \"reason\": \"novel\", \"best_guess\": \"Pasture\", \"confidence\": 0.9304}, {\"chip_id\": \"passC-026\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9803}, {\"chip_id\": \"passC-027\", \"reason\": \"novel\", \"best_guess\": \"SeaLake\", \"confidence\": 0.9985}, {\"chip_id\": \"passC-033\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9238}, {\"chip_id\": \"passC-040\", \"reason\": \"novel\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.8706}, {\"chip_id\": \"passC-055\", \"reason\": \"novel\", \"best_guess\": \"PermanentCrop\", \"confidence\": 0.998}]}",
+      "q": "In passC, how many chips look like nothing the model was trained on?",
+      "tool_ok": true,
+      "answer_ok": true,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 3.473021208999853,
+      "answer": "In passC, there are 60 unique chip IDs. Out of these, 51 are classified as novel (not something the model was trained on), while 9 are classified as low-confidence. The most common categories are:\n\n- **HerbaceousVegetation**: 10 occurrences\n- **Residential**: 10 occurrences\n- **AnnualCrop**: 7 occurrences\n- **Forest**: 7 occurrences\n- **River**: 6 occurrences\n- **SeaLake**: 5 occurrences\n- **PermanentCrop**: 4 occurrences\n- **Pasture**: 2 occurrences\n\nThe analysis indicates that the majority of the chips are novel, which suggests they might be less likely to be misclassified by the model.",
+      "calls": [
+        {
+          "name": "triage_pass",
+          "args": {
+            "pass_id": "passC"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"pass_id\": \"passD\", \"n_chips\": 60, \"n_auto\": 33, \"n_analyst\": 27, \"n_novel\": 23, \"n_low_confidence\": 4, \"auto_label_counts\": {\"SeaLake\": 9, \"Forest\": 6, \"PermanentCrop\": 6, \"Residential\": 4, \"River\": 4, \"HerbaceousVegetation\": 3, \"AnnualCrop\": 1}, \"analyst_queue\": [{\"chip_id\": \"passD-000\", \"reason\": \"novel\", \"best_guess\": \"PermanentCrop\", \"confidence\": 0.9022}, {\"chip_id\": \"passD-002\", \"reason\": \"novel\", \"best_guess\": \"AnnualCrop\", \"confidence\": 0.6629}, {\"chip_id\": \"passD-005\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.3906}, {\"chip_id\": \"passD-006\", \"reason\": \"novel\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.6744}, {\"chip_id\": \"passD-012\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9961}, {\"chip_id\": \"passD-013\", \"reason\": \"low_confidence\", \"best_guess\": \"Forest\", \"confidence\": 0.6117}, {\"chip_id\": \"passD-014\", \"reason\": \"novel\", \"best_guess\": \"Pasture\", \"confidence\": 0.2983}, {\"chip_id\": \"passD-015\", \"reason\": \"novel\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.7104}, {\"chip_id\": \"passD-016\", \"reason\": \"novel\", \"best_guess\": \"Forest\", \"confidence\": 0.9945}, {\"chip_id\": \"passD-018\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9949}, {\"chip_id\": \"passD-020\", \"reason\": \"novel\", \"best_guess\": \"PermanentCrop\", \"confidence\": 0.405}, {\"chip_id\": \"passD-022\", \"reason\": \"novel\", \"best_guess\": \"SeaLake\", \"confidence\": 0.6934}, {\"chip_id\": \"passD-023\", \"reason\": \"novel\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.9636}, {\"chip_id\": \"passD-026\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9979}, {\"chip_id\": \"passD-027\", \"reason\": \"novel\", \"best_guess\": \"Forest\", \"confidence\": 0.9805}, {\"chip_id\": \"passD-030\", \"reason\": \"novel\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.9882}, {\"chip_id\": \"passD-031\", \"reason\": \"low_confidence\", \"best_guess\": \"Forest\", \"confidence\": 0.6845}, {\"chip_id\": \"passD-032\", \"reason\": \"novel\", \"best_guess\": \"SeaLake\", \"confidence\": 0.4115}, {\"chip_id\": \"passD-033\", \"reason\": \"novel\", \"best_guess\": \"Pasture\", \"confidence\": 0.9445}, {\"chip_id\": \"passD-035\", \"reason\": \"novel\", \"best_guess\": \"Pasture\", \"confidence\": 0.814}, {\"chip_id\": \"passD-037\", \"reason\": \"low_confidence\", \"best_guess\": \"SeaLake\", \"confidence\": 0.7492}, {\"chip_id\": \"passD-038\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.989}, {\"chip_id\": \"passD-051\", \"reason\": \"novel\", \"best_guess\": \"Pasture\", \"confidence\": 0.9782}, {\"chip_id\": \"passD-053\", \"reason\": \"novel\", \"best_guess\": \"SeaLake\", \"confidence\": 0.9768}, {\"chip_id\": \"passD-055\", \"reason\": \"novel\", \"best_guess\": \"AnnualCrop\", \"confidence\": 0.7789}]}",
+      "q": "In passD, how many chips look like nothing the model was trained on?",
+      "tool_ok": true,
+      "answer_ok": true,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 2.8700127499978407,
+      "answer": "In passD, there are 60 unique chip IDs. Out of these, 33 are classified as novel (not something the model was trained on), 27 are classified as low-confidence, and 23 are classified as having no clear classification yet. The most common categories among the novel chips are PermanentCrop, AnnualCrop, River, HerbaceousVegetation, and Forest.",
+      "calls": [
+        {
+          "name": "triage_pass",
+          "args": {
+            "pass_id": "passD"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"pass_id\": \"passA\", \"n_chips\": 60, \"n_auto\": 55, \"n_analyst\": 5, \"n_novel\": 2, \"n_low_confidence\": 3, \"auto_label_counts\": {\"Residential\": 9, \"AnnualCrop\": 9, \"Forest\": 7, \"PermanentCrop\": 7, \"SeaLake\": 7, \"Pasture\": 6, \"River\": 5, \"HerbaceousVegetation\": 5}, \"analyst_queue\": [{\"chip_id\": \"passA-005\", \"reason\": \"low_confidence\", \"best_guess\": \"SeaLake\", \"confidence\": 0.4995}, {\"chip_id\": \"passA-011\", \"reason\": \"low_confidence\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.7993}, {\"chip_id\": \"passA-019\", \"reason\": \"low_confidence\", \"best_guess\": \"AnnualCrop\", \"confidence\": 0.6715}, {\"chip_id\": \"passA-022\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9965}, {\"chip_id\": \"passA-035\", \"reason\": \"novel\", \"best_guess\": \"SeaLake\", \"confidence\": 0.9551}]}",
+      "q": "What land-cover class was auto-labeled most often in passA?",
+      "tool_ok": true,
+      "answer_ok": true,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 3.234504125000967,
+      "answer": "In passA, the land-cover classes that were auto-labeled most often were:\n\n- **Residential**: 9 times\n- **AnnualCrop**: 9 times\n- **Forest**: 7 times\n- **PermanentCrop**: 7 times\n- **SeaLake**: 7 times\n- **Pasture**: 6 times\n- **River**: 5 times\n- **HerbaceousVegetation**: 5 times\n\nThe number of auto-labeled chips varied significantly across these categories. The highest frequency was for **Residential**, followed by **AnnualCrop** and **Forest**. The lowest frequency was for **SeaLake**.",
+      "calls": [
+        {
+          "name": "triage_pass",
+          "args": {
+            "pass_id": "passA"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"chip_id\": \"passB-017\", \"label\": \"Residential\", \"confidence\": 0.9969, \"top3\": [[\"Residential\", 0.9969], [\"Pasture\", 0.0006], [\"HerbaceousVegetation\", 0.0005]], \"novelty_score\": 442.2, \"novelty_threshold\": 1187.47, \"route\": \"auto\", \"reason\": \"auto\"}",
+      "q": "What land-cover class was auto-labeled most often in passB?",
+      "tool_ok": false,
+      "answer_ok": false,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 1.324669375000667,
+      "answer": "The most frequently auto-labeled land-cover class in passB was Residential, with a confidence of 0.9969.",
+      "calls": [
+        {
+          "name": "classify_chip",
+          "args": {
+            "chip_id": "passB-017"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"pass_id\": \"passC\", \"n_chips\": 60, \"n_auto\": 51, \"n_analyst\": 9, \"n_novel\": 9, \"n_low_confidence\": 0, \"auto_label_counts\": {\"HerbaceousVegetation\": 10, \"Residential\": 10, \"AnnualCrop\": 7, \"Forest\": 7, \"River\": 6, \"SeaLake\": 5, \"PermanentCrop\": 4, \"Pasture\": 2}, \"analyst_queue\": [{\"chip_id\": \"passC-014\", \"reason\": \"novel\", \"best_guess\": \"PermanentCrop\", \"confidence\": 0.8064}, {\"chip_id\": \"passC-020\", \"reason\": \"novel\", \"best_guess\": \"PermanentCrop\", \"confidence\": 0.8803}, {\"chip_id\": \"passC-021\", \"reason\": \"novel\", \"best_guess\": \"Residential\", \"confidence\": 0.8997}, {\"chip_id\": \"passC-024\", \"reason\": \"novel\", \"best_guess\": \"Pasture\", \"confidence\": 0.9304}, {\"chip_id\": \"passC-026\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9803}, {\"chip_id\": \"passC-027\", \"reason\": \"novel\", \"best_guess\": \"SeaLake\", \"confidence\": 0.9985}, {\"chip_id\": \"passC-033\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9238}, {\"chip_id\": \"passC-040\", \"reason\": \"novel\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.8706}, {\"chip_id\": \"passC-055\", \"reason\": \"novel\", \"best_guess\": \"PermanentCrop\", \"confidence\": 0.998}]}",
+      "q": "What land-cover class was auto-labeled most often in passC?",
+      "tool_ok": true,
+      "answer_ok": false,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 2.0288671670023177,
+      "answer": "The most frequently auto-labeled land-cover class in passC is **PermanentCrop**. This classification has been held back by the analyst queue as it's not similar to any known land-cover classes in the training dataset.",
+      "calls": [
+        {
+          "name": "triage_pass",
+          "args": {
+            "pass_id": "passC"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"pass_id\": \"passD\", \"n_chips\": 60, \"n_auto\": 33, \"n_analyst\": 27, \"n_novel\": 23, \"n_low_confidence\": 4, \"auto_label_counts\": {\"SeaLake\": 9, \"Forest\": 6, \"PermanentCrop\": 6, \"Residential\": 4, \"River\": 4, \"HerbaceousVegetation\": 3, \"AnnualCrop\": 1}, \"analyst_queue\": [{\"chip_id\": \"passD-000\", \"reason\": \"novel\", \"best_guess\": \"PermanentCrop\", \"confidence\": 0.9022}, {\"chip_id\": \"passD-002\", \"reason\": \"novel\", \"best_guess\": \"AnnualCrop\", \"confidence\": 0.6629}, {\"chip_id\": \"passD-005\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.3906}, {\"chip_id\": \"passD-006\", \"reason\": \"novel\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.6744}, {\"chip_id\": \"passD-012\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9961}, {\"chip_id\": \"passD-013\", \"reason\": \"low_confidence\", \"best_guess\": \"Forest\", \"confidence\": 0.6117}, {\"chip_id\": \"passD-014\", \"reason\": \"novel\", \"best_guess\": \"Pasture\", \"confidence\": 0.2983}, {\"chip_id\": \"passD-015\", \"reason\": \"novel\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.7104}, {\"chip_id\": \"passD-016\", \"reason\": \"novel\", \"best_guess\": \"Forest\", \"confidence\": 0.9945}, {\"chip_id\": \"passD-018\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9949}, {\"chip_id\": \"passD-020\", \"reason\": \"novel\", \"best_guess\": \"PermanentCrop\", \"confidence\": 0.405}, {\"chip_id\": \"passD-022\", \"reason\": \"novel\", \"best_guess\": \"SeaLake\", \"confidence\": 0.6934}, {\"chip_id\": \"passD-023\", \"reason\": \"novel\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.9636}, {\"chip_id\": \"passD-026\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.9979}, {\"chip_id\": \"passD-027\", \"reason\": \"novel\", \"best_guess\": \"Forest\", \"confidence\": 0.9805}, {\"chip_id\": \"passD-030\", \"reason\": \"novel\", \"best_guess\": \"HerbaceousVegetation\", \"confidence\": 0.9882}, {\"chip_id\": \"passD-031\", \"reason\": \"low_confidence\", \"best_guess\": \"Forest\", \"confidence\": 0.6845}, {\"chip_id\": \"passD-032\", \"reason\": \"novel\", \"best_guess\": \"SeaLake\", \"confidence\": 0.4115}, {\"chip_id\": \"passD-033\", \"reason\": \"novel\", \"best_guess\": \"Pasture\", \"confidence\": 0.9445}, {\"chip_id\": \"passD-035\", \"reason\": \"novel\", \"best_guess\": \"Pasture\", \"confidence\": 0.814}, {\"chip_id\": \"passD-037\", \"reason\": \"low_confidence\", \"best_guess\": \"SeaLake\", \"confidence\": 0.7492}, {\"chip_id\": \"passD-038\", \"reason\": \"novel\", \"best_guess\": \"River\", \"confidence\": 0.989}, {\"chip_id\": \"passD-051\", \"reason\": \"novel\", \"best_guess\": \"Pasture\", \"confidence\": 0.9782}, {\"chip_id\": \"passD-053\", \"reason\": \"novel\", \"best_guess\": \"SeaLake\", \"confidence\": 0.9768}, {\"chip_id\": \"passD-055\", \"reason\": \"novel\", \"best_guess\": \"AnnualCrop\", \"confidence\": 0.7789}]}",
+      "q": "What land-cover class was auto-labeled most often in passD?",
+      "tool_ok": true,
+      "answer_ok": false,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 2.2732465000008233,
+      "answer": "The land-cover class that was auto-labeled most often in passD is **Forest**. This corresponds to the highest count of 60 auto-labels out of 60 total chips.",
+      "calls": [
+        {
+          "name": "triage_pass",
+          "args": {
+            "pass_id": "passD"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"chip_id\": \"passA-003\", \"label\": \"AnnualCrop\", \"confidence\": 0.9978, \"top3\": [[\"AnnualCrop\", 0.9978], [\"Forest\", 0.0005], [\"Residential\", 0.0004]], \"novelty_score\": 527.28, \"novelty_threshold\": 1187.47, \"route\": \"auto\", \"reason\": \"auto\"}",
+      "q": "Classify chip passA-003.",
+      "tool_ok": true,
+      "answer_ok": true,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 2.256528582998726,
+      "answer": "The classified chip for passA-003 is AnnualCrop. It has a confidence of 0.9978, which is very high. The top three classifications are AnnualCrop, Forest, and Residential. This chip is novel because it does not match any known categories in the training dataset. Its novelty score is 527.28, which is above the threshold of 1187.47. The classification is automatic, so no manual review is needed.",
+      "calls": [
+        {
+          "name": "classify_chip",
+          "args": {
+            "chip_id": "passA-003"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"chip_id\": \"passA-017\", \"label\": \"Forest\", \"confidence\": 0.9957, \"top3\": [[\"Forest\", 0.9957], [\"SeaLake\", 0.001], [\"Residential\", 0.0009]], \"novelty_score\": 221.42, \"novelty_threshold\": 1187.47, \"route\": \"auto\", \"reason\": \"auto\"}",
+      "q": "Classify chip passA-017.",
+      "tool_ok": true,
+      "answer_ok": true,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 1.9682260409972514,
+      "answer": "The classified chip for passA-017 is Forest. It has a confidence of 0.9957. The top three classifications are Forest, SeaLake, and Residential. The novelty score is 221.42, which is above the novelty threshold of 1187.47. Since the classification is novel, the route is auto.",
+      "calls": [
+        {
+          "name": "classify_chip",
+          "args": {
+            "chip_id": "passA-017"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"chip_id\": \"passB-003\", \"label\": \"Pasture\", \"confidence\": 0.9946, \"top3\": [[\"Pasture\", 0.9946], [\"PermanentCrop\", 0.0022], [\"Forest\", 0.0011]], \"novelty_score\": 937.02, \"novelty_threshold\": 1187.47, \"route\": \"auto\", \"reason\": \"auto\"}",
+      "q": "Classify chip passB-003.",
+      "tool_ok": true,
+      "answer_ok": true,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 1.9234936670000025,
+      "answer": "The classified chip for passB-003 is Pasture. It has a confidence of 0.9946 and is categorized under Pasture. The novelty score is 937.02, which is above the novelty threshold of 1187.47. Since the classification is automatic, the route is set to \"auto\".",
+      "calls": [
+        {
+          "name": "classify_chip",
+          "args": {
+            "chip_id": "passB-003"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "{\"chip_id\": \"passB-017\", \"label\": \"Residential\", \"confidence\": 0.9969, \"top3\": [[\"Residential\", 0.9969], [\"Pasture\", 0.0006], [\"HerbaceousVegetation\", 0.0005]], \"novelty_score\": 442.2, \"novelty_threshold\": 1187.47, \"route\": \"auto\", \"reason\": \"auto\"}",
+      "q": "Classify chip passB-017.",
+      "tool_ok": true,
+      "answer_ok": true,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 2.148079834001692,
+      "answer": "The classified chip for passB-017 is Residential with a confidence of 0.9969. It has three top-3 classifications: Residential, Pasture, and HerbaceousVegetation. The novelty score is 442.2, which is above the novelty threshold of 1187.47. Since the classification is novel, the route is auto.",
+      "calls": [
+        {
+          "name": "classify_chip",
+          "args": {
+            "chip_id": "passB-017"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "ERROR: unknown pass_id 'chipD'; call list_passes",
+      "q": "Classify chip passD-003.",
+      "tool_ok": false,
+      "answer_ok": false,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 1,
+      "sec": 1.4874087499993038,
+      "answer": "I encountered an error while trying to classify chip D-003. Please ensure that the tool is correctly configured and try again.",
+      "calls": [
+        {
+          "name": "classify_chip",
+          "args": {
+            "chip_id": "chipD-003"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "ERROR: unknown pass_id 'chipD'; call list_passes",
+      "q": "Classify chip passD-017.",
+      "tool_ok": false,
+      "answer_ok": false,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 1,
+      "sec": 1.4473674170003505,
+      "answer": "I encountered an error while trying to classify chip D-017. Please ensure that the tool is correctly configured and try again.",
+      "calls": [
+        {
+          "name": "classify_chip",
+          "args": {
+            "chip_id": "chipD-017"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "ERROR: unknown pass_id 'chipC'; call list_passes",
+      "q": "Chip passC-014 was sent to an analyst. Which training classes is it most similar to?",
+      "tool_ok": false,
+      "answer_ok": false,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 1,
+      "sec": 1.6644403749996854,
+      "answer": "I encountered an error while trying to execute the find_similar function. Could you please check if there's any additional information or context related to the chip ID that might help me understand what I'm looking for?",
+      "calls": [
+        {
+          "name": "find_similar",
+          "args": {
+            "chip_id": "chipC-014"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "ERROR: unknown pass_id 'chipC'; call list_passes",
+      "q": "Chip passC-020 was sent to an analyst. Which training classes is it most similar to?",
+      "tool_ok": false,
+      "answer_ok": false,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 1,
+      "sec": 1.6428245829993102,
+      "answer": "I encountered an error while trying to execute the find_similar function. Could you please check if there's any additional information or context related to the chip ID that might help me understand what I'm looking for?",
+      "calls": [
+        {
+          "name": "find_similar",
+          "args": {
+            "chip_id": "chipC-020"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "ERROR: unknown pass_id 'chipC'; call list_passes",
+      "q": "Chip passC-021 was sent to an analyst. Which training classes is it most similar to?",
+      "tool_ok": false,
+      "answer_ok": false,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 1,
+      "sec": 1.6490595840004971,
+      "answer": "I encountered an error while trying to execute the find_similar function. Could you please check if there's any additional information or context related to the chip ID that might help me understand what I'm looking for?",
+      "calls": [
+        {
+          "name": "find_similar",
+          "args": {
+            "chip_id": "chipC-021"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "ERROR: unknown pass_id 'chipC'; call list_passes",
+      "q": "Chip passC-024 was sent to an analyst. Which training classes is it most similar to?",
+      "tool_ok": false,
+      "answer_ok": false,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 1,
+      "sec": 1.6484400829976948,
+      "answer": "I encountered an error while trying to execute the find_similar function. Could you please check if there's any additional information or context related to the chip ID that might help me understand what I'm looking for?",
+      "calls": [
+        {
+          "name": "find_similar",
+          "args": {
+            "chip_id": "chipC-024"
+          }
+        }
+      ]
+    },
+    {
+      "tool_text": "[{\"pass_id\": \"passA\", \"n_chips\": 60, \"collected\": \"2026-10-01T14:05Z\"}, {\"pass_id\": \"passB\", \"n_chips\": 60, \"collected\": \"2026-10-02T14:11Z\"}, {\"pass_id\": \"passC\", \"n_chips\": 60, \"collected\": \"2026-10-03T13:58Z\"}, {\"pass_id\": \"passD\", \"n_chips\": 60, \"collected\": \"2026-10-04T14:02Z\"}]",
+      "q": "Which collection pass has the most chips flagged as novel?",
+      "tool_ok": false,
+      "answer_ok": false,
+      "grounded": true,
+      "n_calls": 1,
+      "malformed": 0,
+      "errors": 0,
+      "sec": 1.3541451249984675,
+      "answer": "The collection pass with the most chips flagged as novel is <tool_response>passA</tool_response>. It was collected on October 1st at 14:05.",
+      "calls": [
+        {
+          "name": "list_passes",
+          "args": {}
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "temperature": 0.6602142709553646,
+  "conf_threshold": 0.8298547267913818,
+  "novelty_threshold": 1187.467529296875,
+  "target_risk": 0.01,
+  "novelty_fpr": 0.05,
+  "classes": [
+    "AnnualCrop",
+    "Forest",
+    "HerbaceousVegetation",
+    "Pasture",
+    "PermanentCrop",
+    "Residential",
+    "River",
+    "SeaLake"
+  ]
+}

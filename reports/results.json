@@ -1,0 +1,496 @@
+{
+  "classes": {
+    "known": [
+      "AnnualCrop",
+      "Forest",
+      "HerbaceousVegetation",
+      "Pasture",
+      "PermanentCrop",
+      "Residential",
+      "River",
+      "SeaLake"
+    ],
+    "novel": [
+      "Highway",
+      "Industrial"
+    ]
+  },
+  "sizes": {
+    "train_known": 13203,
+    "val_known": 4394,
+    "test_known": 4403,
+    "test_novel": 997
+  },
+  "baseline_hgb": {
+    "test_acc": 0.9375425846014082,
+    "test_macro_f1": 0.9352611298313063,
+    "degraded_sev3_acc": {
+      "haze": 0.33204633204633205,
+      "blur": 0.5419032477856007,
+      "noise": 0.2559618441971383,
+      "jpeg": 0.660458778105837,
+      "lowres": 0.47876447876447875
+    }
+  },
+  "clean": {
+    "test_acc": 0.9861458096752215,
+    "test_macro_f1": 0.9857590239125198,
+    "ece_raw": 0.042723681495971035,
+    "ece_temp_scaled": 0.006063675923751414,
+    "policy": {
+      "temperature": 0.6759312852831275,
+      "conf_threshold": 0.5120847225189209,
+      "novelty_threshold": 1346.5325927734375,
+      "target_risk": 0.01,
+      "novelty_fpr": 0.05
+    },
+    "robustness_acc": {
+      "haze": {
+        "1": 0.8323870088575971,
+        "2": 0.668635021576198,
+        "3": 0.4415171473995003,
+        "4": 0.22098569157392686,
+        "5": 0.14149443561208266
+      },
+      "blur": {
+        "1": 0.9734272087213264,
+        "2": 0.7079264138087668,
+        "3": 0.31137860549625257,
+        "4": 0.19622984328866683,
+        "5": 0.1394503747444924
+      },
+      "noise": {
+        "1": 0.5641607994549172,
+        "2": 0.20417896888485124,
+        "3": 0.1278673631614808,
+        "4": 0.12582330229389052,
+        "5": 0.12582330229389052
+      },
+      "jpeg": {
+        "1": 0.7281399046104928,
+        "2": 0.6418351124233477,
+        "3": 0.5060186236656825,
+        "4": 0.4562798092209857,
+        "5": 0.35975471269588916
+      },
+      "lowres": {
+        "1": 0.7174653645241881,
+        "2": 0.44219850102203045,
+        "3": 0.2718600953895072,
+        "4": 0.19191460367930957,
+        "5": 0.14263002498296615
+      }
+    },
+    "mean_degraded_acc": 0.40957528957528955,
+    "novelty": {
+      "msp": {
+        "auroc": 0.8073805791665252,
+        "fpr_at_95tpr": 0.8698614580967522
+      },
+      "energy": {
+        "auroc": 0.6562672345904395,
+        "fpr_at_95tpr": 0.8501022030433795
+      },
+      "mahalanobis": {
+        "auroc": 0.9360083429940058,
+        "fpr_at_95tpr": 0.2691346808993868
+      },
+      "knn": {
+        "auroc": 0.9073052680640149,
+        "fpr_at_95tpr": 0.39972745855098796
+      },
+      "relative_mahalanobis": {
+        "auroc": 0.9385626787243402,
+        "fpr_at_95tpr": 0.27254144901203725
+      }
+    },
+    "novelty_by_class_mahalanobis": {
+      "Highway": 0.9245954920765167,
+      "Industrial": 0.9473072932037356
+    },
+    "triage_clean_feed": {
+      "n": 5400,
+      "auto_rate": 0.8375925925925926,
+      "auto_error_rate": 0.08379394207384479,
+      "novel_to_analyst": 0.6579739217652959,
+      "novel_flagged_as_novel": 0.6579739217652959,
+      "known_auto_rate": 0.9498069498069498,
+      "known_auto_acc": 0.9909134385461502
+    },
+    "triage_tradeoff": {
+      "0.02": {
+        "n": 5400,
+        "auto_rate": 0.8812962962962962,
+        "auto_error_rate": 0.10632485816347972,
+        "novel_to_analyst": 0.5325977933801405,
+        "novel_flagged_as_novel": 0.5315947843530592,
+        "known_auto_rate": 0.9750170338405633,
+        "known_auto_acc": 0.9906825064057768
+      },
+      "0.05": {
+        "n": 5400,
+        "auto_rate": 0.8375925925925926,
+        "auto_error_rate": 0.08379394207384479,
+        "novel_to_analyst": 0.6579739217652959,
+        "novel_flagged_as_novel": 0.6579739217652959,
+        "known_auto_rate": 0.9498069498069498,
+        "known_auto_acc": 0.9909134385461502
+      },
+      "0.1": {
+        "n": 5400,
+        "auto_rate": 0.7727777777777778,
+        "auto_error_rate": 0.056074766355140186,
+        "novel_to_analyst": 0.7823470411233701,
+        "novel_flagged_as_novel": 0.7823470411233701,
+        "known_auto_rate": 0.8984783102430162,
+        "known_auto_acc": 0.9957027300303337
+      },
+      "0.2": {
+        "n": 5400,
+        "auto_rate": 0.6735185185185185,
+        "auto_error_rate": 0.02914489964256255,
+        "novel_to_analyst": 0.8986960882647944,
+        "novel_flagged_as_novel": 0.8986960882647944,
+        "known_auto_rate": 0.803088803088803,
+        "known_auto_acc": 0.9985859728506787
+      }
+    },
+    "triage_no_abstention_error": 0.19592592592592592,
+    "triage_degraded_feed": {
+      "haze": {
+        "n": 5400,
+        "auto_rate": 0.30777777777777776,
+        "auto_error_rate": 0.690734055354994,
+        "novel_to_analyst": 0.8154463390170511,
+        "novel_flagged_as_novel": 0.8154463390170511,
+        "known_auto_rate": 0.33568021803315923,
+        "known_auto_acc": 0.34776725304465494
+      },
+      "blur": {
+        "n": 5400,
+        "auto_rate": 0.39685185185185184,
+        "auto_error_rate": 0.5996266915538964,
+        "novel_to_analyst": 0.9067201604814443,
+        "novel_flagged_as_novel": 0.9067201604814443,
+        "known_auto_rate": 0.4655916420622303,
+        "known_auto_acc": 0.41853658536585364
+      },
+      "noise": {
+        "n": 5400,
+        "auto_rate": 0.4457407407407407,
+        "auto_error_rate": 0.8280016618196926,
+        "novel_to_analyst": 0.21664994984954863,
+        "novel_flagged_as_novel": 0.21664994984954863,
+        "known_auto_rate": 0.3692936634113105,
+        "known_auto_acc": 0.25461254612546125
+      },
+      "jpeg": {
+        "n": 5400,
+        "auto_rate": 0.23407407407407407,
+        "auto_error_rate": 0.41455696202531644,
+        "novel_to_analyst": 0.9067201604814443,
+        "novel_flagged_as_novel": 0.9067201604814443,
+        "known_auto_rate": 0.265955030660913,
+        "known_auto_acc": 0.6319385140905209
+      },
+      "lowres": {
+        "n": 5400,
+        "auto_rate": 0.4398148148148148,
+        "auto_error_rate": 0.6981052631578948,
+        "novel_to_analyst": 0.8345035105315948,
+        "novel_flagged_as_novel": 0.8345035105315948,
+        "known_auto_rate": 0.5019305019305019,
+        "known_auto_acc": 0.3244343891402715
+      }
+    },
+    "novel_clustering": {
+      "n_flagged": 877,
+      "frac_flagged_truly_novel": 0.7480045610034207,
+      "silhouette_by_k": {
+        "2": 0.25668519735336304,
+        "3": 0.2858872711658478,
+        "4": 0.31130510568618774,
+        "5": 0.32998737692832947,
+        "6": 0.34233516454696655
+      },
+      "k": 6,
+      "nmi": 0.46299190406303653,
+      "ari": 0.3599916200240418,
+      "clusters": [
+        {
+          "size": 232,
+          "majority": "Industrial",
+          "purity": 0.875
+        },
+        {
+          "size": 225,
+          "majority": "Highway",
+          "purity": 0.7733333333333333
+        },
+        {
+          "size": 81,
+          "majority": "HerbaceousVegetation",
+          "purity": 0.3950617283950617
+        },
+        {
+          "size": 225,
+          "majority": "Industrial",
+          "purity": 0.6622222222222223
+        },
+        {
+          "size": 62,
+          "majority": "AnnualCrop",
+          "purity": 0.6451612903225806
+        },
+        {
+          "size": 52,
+          "majority": "Pasture",
+          "purity": 0.5961538461538461
+        }
+      ]
+    },
+    "drift": {
+      "no_shift": {
+        "alarm_rate_at_0.05": 0.05,
+        "median_p": 0.37623762376237624
+      },
+      "haze_sev2": {
+        "alarm_rate_at_0.05": 1.0,
+        "median_p": 0.009900990099009901
+      },
+      "jpeg_sev3": {
+        "alarm_rate_at_0.05": 1.0,
+        "median_p": 0.009900990099009901
+      },
+      "novel_20pct": {
+        "alarm_rate_at_0.05": 0.85,
+        "median_p": 0.009900990099009901
+      },
+      "prior_shift_water_forest": {
+        "alarm_rate_at_0.05": 1.0,
+        "median_p": 0.009900990099009901
+      }
+    }
+  },
+  "robust": {
+    "test_acc": 0.9791051555757438,
+    "test_macro_f1": 0.9788559545698863,
+    "ece_raw": 0.04278501384290222,
+    "ece_temp_scaled": 0.004437334945519706,
+    "policy": {
+      "temperature": 0.6602142709553646,
+      "conf_threshold": 0.8298547267913818,
+      "novelty_threshold": 1187.467529296875,
+      "target_risk": 0.01,
+      "novelty_fpr": 0.05
+    },
+    "robustness_acc": {
+      "haze": {
+        "1": 0.9761526232114467,
+        "2": 0.9691119691119691,
+        "3": 0.9641153758800818,
+        "4": 0.9495798319327731,
+        "5": 0.8557801498977969
+      },
+      "blur": {
+        "1": 0.9779695662048603,
+        "2": 0.9734272087213264,
+        "3": 0.9675221439927322,
+        "4": 0.9577560754031342,
+        "5": 0.9123325005677947
+      },
+      "noise": {
+        "1": 0.9691119691119691,
+        "2": 0.9516238928003634,
+        "3": 0.9300476947535771,
+        "4": 0.8973427208721326,
+        "5": 0.8282988871224165
+      },
+      "jpeg": {
+        "1": 0.9561662502838973,
+        "2": 0.9425391778332954,
+        "3": 0.9116511469452646,
+        "4": 0.856461503520327,
+        "5": 0.6220758573699751
+      },
+      "lowres": {
+        "1": 0.9743356802180332,
+        "2": 0.9718373836020895,
+        "3": 0.9618441971383148,
+        "4": 0.943674767204179,
+        "5": 0.7710651828298887
+      }
+    },
+    "mean_degraded_acc": 0.9196729502611857,
+    "novelty": {
+      "msp": {
+        "auroc": 0.8338689700716959,
+        "fpr_at_95tpr": 0.8124006359300477
+      },
+      "energy": {
+        "auroc": 0.7420825957317786,
+        "fpr_at_95tpr": 0.8396547808312514
+      },
+      "mahalanobis": {
+        "auroc": 0.9117707426162203,
+        "fpr_at_95tpr": 0.35453100158982515
+      },
+      "knn": {
+        "auroc": 0.8854784886114169,
+        "fpr_at_95tpr": 0.5423574835339541
+      },
+      "relative_mahalanobis": {
+        "auroc": 0.9214620923866308,
+        "fpr_at_95tpr": 0.3302293890529185
+      }
+    },
+    "novelty_by_class_mahalanobis": {
+      "Highway": 0.9198722645117332,
+      "Industrial": 0.9037500742326386
+    },
+    "triage_clean_feed": {
+      "n": 5400,
+      "auto_rate": 0.8366666666666667,
+      "auto_error_rate": 0.0980522355024347,
+      "novel_to_analyst": 0.5957873620862588,
+      "novel_flagged_as_novel": 0.567703109327984,
+      "known_auto_rate": 0.9345900522371111,
+      "known_auto_acc": 0.9902794653705954
+    },
+    "triage_tradeoff": {
+      "0.02": {
+        "n": 5400,
+        "auto_rate": 0.8790740740740741,
+        "auto_error_rate": 0.12407836528333685,
+        "novel_to_analyst": 0.4473420260782347,
+        "novel_flagged_as_novel": 0.3430290872617854,
+        "known_auto_rate": 0.9529866000454236,
+        "known_auto_acc": 0.9909437559580553
+      },
+      "0.05": {
+        "n": 5400,
+        "auto_rate": 0.8366666666666667,
+        "auto_error_rate": 0.0980522355024347,
+        "novel_to_analyst": 0.5957873620862588,
+        "novel_flagged_as_novel": 0.567703109327984,
+        "known_auto_rate": 0.9345900522371111,
+        "known_auto_acc": 0.9902794653705954
+      },
+      "0.1": {
+        "n": 5400,
+        "auto_rate": 0.7722222222222223,
+        "auto_error_rate": 0.07050359712230216,
+        "novel_to_analyst": 0.7422266800401204,
+        "novel_flagged_as_novel": 0.7321965897693079,
+        "known_auto_rate": 0.8887122416534181,
+        "known_auto_acc": 0.9905443393815487
+      },
+      "0.2": {
+        "n": 5400,
+        "auto_rate": 0.6796296296296296,
+        "auto_error_rate": 0.049318801089918256,
+        "novel_to_analyst": 0.8485456369107321,
+        "novel_flagged_as_novel": 0.8485456369107321,
+        "known_auto_rate": 0.7992277992277992,
+        "known_auto_acc": 0.9914748508098892
+      }
+    },
+    "triage_no_abstention_error": 0.20166666666666666,
+    "triage_degraded_feed": {
+      "haze": {
+        "n": 5400,
+        "auto_rate": 0.5933333333333334,
+        "auto_error_rate": 0.1457553058676654,
+        "novel_to_analyst": 0.567703109327984,
+        "novel_flagged_as_novel": 0.5386158475426279,
+        "known_auto_rate": 0.6297978650919828,
+        "known_auto_acc": 0.9870176703930761
+      },
+      "blur": {
+        "n": 5400,
+        "auto_rate": 0.7324074074074074,
+        "auto_error_rate": 0.10670037926675095,
+        "novel_to_analyst": 0.6198595787362087,
+        "novel_flagged_as_novel": 0.6088264794383149,
+        "known_auto_rate": 0.812173518055871,
+        "known_auto_acc": 0.9879753914988815
+      },
+      "noise": {
+        "n": 5400,
+        "auto_rate": 0.6433333333333333,
+        "auto_error_rate": 0.12089810017271158,
+        "novel_to_analyst": 0.6449348044132397,
+        "novel_flagged_as_novel": 0.6158475426278837,
+        "known_auto_rate": 0.7086077674312968,
+        "known_auto_acc": 0.9788461538461538
+      },
+      "jpeg": {
+        "n": 5400,
+        "auto_rate": 0.6588888888888889,
+        "auto_error_rate": 0.14165261382799327,
+        "novel_to_analyst": 0.6058174523570712,
+        "novel_flagged_as_novel": 0.5797392176529589,
+        "known_auto_rate": 0.7188280717692482,
+        "known_auto_acc": 0.9649289099526066
+      },
+      "lowres": {
+        "n": 5400,
+        "auto_rate": 0.7124074074074074,
+        "auto_error_rate": 0.0930595269040811,
+        "novel_to_analyst": 0.6870611835506519,
+        "novel_flagged_as_novel": 0.6670010030090271,
+        "known_auto_rate": 0.8028616852146264,
+        "known_auto_acc": 0.986987270155587
+      }
+    },
+    "novel_clustering": {
+      "n_flagged": 772,
+      "frac_flagged_truly_novel": 0.7331606217616581,
+      "silhouette_by_k": {
+        "2": 0.2997247874736786,
+        "3": 0.28009676933288574,
+        "4": 0.2351444959640503,
+        "5": 0.24034027755260468,
+        "6": 0.229116290807724
+      },
+      "k": 2,
+      "nmi": 0.3685121211844016,
+      "ari": 0.3561604411818345,
+      "clusters": [
+        {
+          "size": 367,
+          "majority": "Industrial",
+          "purity": 0.7602179836512262
+        },
+        {
+          "size": 405,
+          "majority": "Highway",
+          "purity": 0.5506172839506173
+        }
+      ]
+    },
+    "drift": {
+      "no_shift": {
+        "alarm_rate_at_0.05": 0.0,
+        "median_p": 0.45544554455445546
+      },
+      "haze_sev2": {
+        "alarm_rate_at_0.05": 0.6,
+        "median_p": 0.04950495049504951
+      },
+      "jpeg_sev3": {
+        "alarm_rate_at_0.05": 1.0,
+        "median_p": 0.009900990099009901
+      },
+      "novel_20pct": {
+        "alarm_rate_at_0.05": 0.7,
+        "median_p": 0.01485148514851485
+      },
+      "prior_shift_water_forest": {
+        "alarm_rate_at_0.05": 1.0,
+        "median_p": 0.009900990099009901
+      }
+    }
+  },
+  "runtime_sec": 689.8507997989655
+}

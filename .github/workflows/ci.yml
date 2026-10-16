@@ -1,0 +1,27 @@
+name: ci
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {lfs: false}
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -r requirements-serve.txt scikit-learn==1.9.1 pytest==9.1.1 httpx==0.28.1
+      # unit tests always; service tests run against the committed ONNX artifacts
+      - run: python -m pytest -q
+  docker:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t geoint-triage:ci .
+      - name: smoke test
+        run: |
+          docker run -d -p 8080:8080 --name svc geoint-triage:ci
+          for i in $(seq 1 30); do curl -sf localhost:8080/health && break; sleep 1; done
+          f=$(ls samples/feed/passC/*.png | head -20 | sed 's/^/-F files=@/' | tr '\n' ' ')
+          curl -sf $f localhost:8080/classify | python -c "import json,sys;r=json.load(sys.stdin)['results'];assert len(r)==20;print({x['route'] for x in r})"
